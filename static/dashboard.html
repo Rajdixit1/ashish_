@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HS Task Group | My dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="dashboard-body">
+  <header class="site-header dashboard-header"><a class="brand" href="/"><span class="brand-mark">HS</span><span>Task Group</span></a><span class="dashboard-label">MY WORKSPACE</span><button class="button button-small button-outline" id="logout">Log out</button></header>
+  <main class="dashboard-main">
+    <section class="dashboard-welcome"><div><p class="eyebrow">Your task workspace</p><h1>Welcome, <span id="client-name">there</span></h1><p class="dashboard-subtitle">Complete each task from top to bottom. Your next task unlocks automatically.</p></div><div class="balance-card"><span>Available balance</span><strong>Rs <b id="balance">0</b></strong><small>Starts at Rs 0 for every new account</small></div></section>
+    <section class="dashboard-grid">
+      <div class="dashboard-panel tasks-panel"><div class="panel-heading"><div><p class="eyebrow">One by one</p><h2>My task queue</h2></div><span class="queue-note">Top to bottom</span></div><div id="task-list" class="dashboard-task-list"></div></div>
+      <aside class="dashboard-panel withdrawal-panel"><p class="eyebrow">Payouts</p><h2>Withdraw balance</h2><p class="panel-copy">Minimum withdrawal is Rs 100. Your request becomes a pending withdrawal task for admin verification.</p><div class="admin-contact"><span class="contact-icon">&#9742;</span><span><small>Contact admin</small><strong id="admin-contact">Loading...</strong></span></div><form id="withdrawal-form"><label>Amount<input type="number" name="amount" min="100" placeholder="Minimum Rs 100" required></label><label>Bank details<input type="text" name="bank_details" placeholder="A/c number / IFSC" required></label><button class="button button-dark" type="submit">Request withdrawal <span aria-hidden="true">&#8594;</span></button><p class="form-message" id="withdrawal-message" role="status"></p></form></aside>
+    </section>
+    <section class="dashboard-panel withdrawal-history"><div class="panel-heading"><div><p class="eyebrow">Track every request</p><h2>Withdrawal tasks</h2></div><span class="queue-note">Admin review queue</span></div><div id="withdrawal-list" class="withdrawal-list"></div></section>
+  </main>
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

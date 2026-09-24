@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Complete simple online tasks and earn rewards with HS Task Group.">
+  <title>HS Task Group | Small tasks. Real rewards.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="HS Task Group home">
+        <span class="brand-mark">HS</span>
+        <span>Task Group</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="button button-small button-outline" data-open-modal="login">Log in</button>
+    </header>
+
+    <main id="top">
+      <section class="hero section-wrap">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="pulse-dot"></span> A simpler way to earn online</p>
+          <h1>Small tasks.<br><em>Real rewards.</em></h1>
+          <p class="hero-lede">Turn a few spare minutes into something useful. Pick a simple task, complete it, and watch your wallet grow.</p>
+          <div class="hero-actions">
+            <button class="button button-primary" data-open-modal="register">Get started <span aria-hidden="true">&#8594;</span></button>
+            <a class="text-link" href="#tasks">See task examples <span aria-hidden="true">&#8594;</span></a>
+          </div>
+          <div class="trust-row"><span class="avatars"><i>RK</i><i>AM</i><i>SP</i></span><span>Join 2,000+ early earners</span></div>
+        </div>
+        <div class="hero-art reveal reveal-delay" aria-label="Illustration of a task wallet">
+          <div class="sun-disc"></div>
+          <div class="scribble scribble-one">EARN</div>
+          <div class="wallet-card">
+            <div class="wallet-top"><span>HS WALLET</span><span class="card-chip"></span></div>
+            <div class="wallet-balance"><small>Available balance</small><strong>Rs 1,240.00</strong></div>
+            <div class="wallet-bottom"><span>**** 4821</span><span>07 / 26</span></div>
+          </div>
+          <div class="float-note note-one"><span class="note-icon">&#10003;</span><span><b>Task complete</b><small>+ Rs 50 added</small></span></div>
+          <div class="float-note note-two"><span class="note-icon orange">&#8593;</span><span><b>Fast withdrawal</b><small>Under 2 hours</small></span></div>
+        </div>
+      </section>
+
+      <section class="ticker"><div class="ticker-inner"><span>WATCH</span><b>&#10022;</b><span>REVIEW</span><b>&#10022;</b><span>SHARE</span><b>&#10022;</b><span>EARN</span><b>&#10022;</b><span>WITHDRAW</span><b>&#10022;</b><span>WATCH</span><b>&#10022;</b><span>REVIEW</span></div></section>
+
+      <section class="process section-wrap" id="how-it-works">
+        <div class="section-heading"><div><p class="eyebrow">No complicated setup</p><h2>How it works</h2></div><p class="section-intro">A clear path from your first task to your first withdrawal.</p></div>
+        <div class="steps">
+          <article class="step-card"><span class="step-number">01</span><span class="step-icon">&#9998;</span><h3>Register</h3><p>Create your account with your name, mobile, and password.</p></article>
+          <article class="step-card"><span class="step-number">02</span><span class="step-icon">&#9678;</span><h3>Browse tasks</h3><p>Open your dashboard to see available free tasks.</p></article>
+          <article class="step-card"><span class="step-number">03</span><span class="step-icon">&#10003;</span><h3>Complete tasks</h3><p>Follow simple steps to finish each one.</p></article>
+          <article class="step-card"><span class="step-number">04</span><span class="step-icon">&#9733;</span><h3>Earn & track</h3><p>See your earnings credited to your wallet instantly.</p></article>
+          <article class="step-card"><span class="step-number">05</span><span class="step-icon">&#8599;</span><h3>Withdraw fast</h3><p>Move your balance to your bank in as little as 2 hours.</p></article>
+        </div>
+      </section>
+
+      <section class="tasks-section section-wrap" id="tasks">
+        <div class="section-heading"><div><p class="eyebrow">A few ways to get started</p><h2>Today's task board</h2></div><span class="live-label"><span class="pulse-dot"></span> Live examples</span></div>
+        <div class="task-grid">
+          <article class="task-item"><span class="task-icon blue">&#9654;</span><div><h3>Watch a YouTube video</h3><p>30 seconds</p></div><strong>Rs 25</strong></article>
+          <article class="task-item"><span class="task-icon yellow">&#9733;</span><div><h3>Leave a Google review</h3><p>Short template provided</p></div><strong>Rs 50</strong></article>
+          <article class="task-item"><span class="task-icon pink">&#9822;</span><div><h3>Follow a social page</h3><p>Screenshot required</p></div><strong>Rs 35</strong></article>
+          <article class="task-item"><span class="task-icon green">&#8595;</span><div><h3>Install and open an app</h3><p>Free to join</p></div><strong>Rs 75</strong></article>
+        </div>
+        <div class="cta-strip"><div><p class="eyebrow">Your next small win</p><h2>Ready to make those spare minutes count?</h2></div><button class="button button-dark" data-open-modal="register">Create free account <span aria-hidden="true">&#8594;</span></button></div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="faq"><span>&copy; 2025 HS Task Group</span><span>Demo site for task earners</span><span>Built for simple beginnings</span></footer>
+  </div>
+
+  <div class="modal-backdrop" data-modal="register" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+      <button class="modal-close" aria-label="Close dialog">&#215;</button>
+      <p class="eyebrow">Start in under a minute</p><h2 id="register-title">Create your account</h2><p class="modal-copy">Use your name, mobile number, and a password. Your account is saved automatically.</p>
+      <form id="signup-form"><label>Name<input name="name" type="text" placeholder="Your name" required></label><label>Mobile number<input name="mobile" type="tel" placeholder="e.g. 98765 43210" required></label><label>Password<input name="password" type="password" placeholder="At least 6 characters" minlength="6" required></label><button class="button button-primary" type="submit">Sign up <span aria-hidden="true">&#8594;</span></button><p class="form-message" role="status"></p></form>
+      <p class="switch-auth">Already registered? <button type="button" data-switch-modal="login">Log in</button></p>
+    </div>
+  </div>
+  <div class="modal-backdrop" data-modal="login" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title"><button class="modal-close" aria-label="Close dialog">&#215;</button><p class="eyebrow">Welcome back</p><h2 id="login-title">Log in</h2><p class="modal-copy">Use the mobile number and password from your account.</p><form id="login-form"><label>Mobile number<input name="mobile" type="tel" placeholder="e.g. 98765 43210" required></label><label>Password<input name="password" type="password" required></label><button class="button button-dark" type="submit">Log in <span aria-hidden="true">&#8594;</span></button><p class="form-message" role="status"></p></form><p class="switch-auth">New here? <button type="button" data-switch-modal="register">Create an account</button></p></div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
