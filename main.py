@@ -66,7 +66,8 @@ class PostgresConnection:
         return PostgresCursor(self.connection.execute(query.replace("?", "%s"), parameters))
 
     def executemany(self, query: str, parameters: list[tuple]) -> None:
-        self.connection.executemany(query.replace("?", "%s"), parameters)
+        with self.connection.cursor() as cursor:
+            cursor.executemany(query.replace("?", "%s"), parameters)
 
     def __enter__(self) -> "PostgresConnection":
         return self
