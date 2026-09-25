@@ -26,6 +26,8 @@ Client records are stored in `hstaskgroup.db`. The `/api/tasks`, `/api/signup`, 
 
 New accounts start with a Rs 0 balance. Tasks must be completed in order, and withdrawals require at least Rs 100. Each withdrawal appears in the admin queue as Pending until the admin verifies payment and marks it Completed.
 
+From the admin panel, every client wallet can be topped up or deducted from using the Wallet column: `POST /api/admin/clients/{client_id}/wallet` with form fields `action` (`add` or `subtract`) and a positive `amount`. The balance is never allowed to go below Rs 0.
+
 ## Neon PostgreSQL deployment
 
 The app uses SQLite locally and switches to Neon PostgreSQL automatically when `DATABASE_URL` is set. Create a Neon project, copy its pooled connection string, and add it to Render as the `DATABASE_URL` environment variable. The included `render.yaml` contains the Render build and start commands.

@@ -14,9 +14,25 @@
   <main class="admin-main">
     <div class="admin-heading"><div><p class="eyebrow">Workspace overview</p><h1>Client records</h1><p class="admin-subtitle">Review every registration and keep an eye on your growing task community.</p></div><button class="button button-primary" id="refresh-clients">Refresh records <span aria-hidden="true">&#8635;</span></button></div>
     <div class="admin-stats"><div><span>Total clients</span><strong id="total-clients">--</strong></div><div><span>Active accounts</span><strong id="active-clients">--</strong></div><div><span>Pending review</span><strong id="pending-clients">--</strong></div></div>
-    <section class="records-panel"><div class="records-top"><h2>All registrations</h2><span id="last-updated">Loading...</span></div><div class="table-wrap"><table><thead><tr><th>Client</th><th>Mobile number</th><th>Status</th><th>Balance</th><th>Tasks</th><th>Registered</th></tr></thead><tbody id="client-rows"></tbody></table></div><p class="admin-message" id="admin-message" role="status"></p></section>
+    <section class="records-panel"><div class="records-top"><h2>All registrations</h2><span id="last-updated">Loading...</span></div><div class="table-wrap"><table><thead><tr><th>Client</th><th>Mobile number</th><th>Status</th><th>Balance</th><th>Wallet</th><th>Tasks</th><th>Registered</th></tr></thead><tbody id="client-rows"></tbody></table></div><p class="admin-message" id="admin-message" role="status"></p></section>
     <section class="admin-lower-grid"><div class="records-panel admin-form-panel"><div class="records-top"><h2>Create task</h2><span>Added after current queue</span></div><form id="task-form"><label>Task title<input name="title" placeholder="e.g. Watch a video" required></label><label>Instructions<textarea name="description" placeholder="What should the client do?" required></textarea></label><label>Reward (Rs)<input name="reward" type="number" min="1" placeholder="10" required></label><button class="button button-primary" type="submit">Add upcoming task <span aria-hidden="true">&#8594;</span></button><p class="admin-message" id="task-message" role="status"></p></form></div><div class="records-panel"><div class="records-top"><h2>Withdrawal tasks</h2><span>Verify payment before completing</span></div><div class="table-wrap"><table><thead><tr><th>Client</th><th>Amount</th><th>Bank details</th><th>Status</th><th>Action</th></tr></thead><tbody id="withdrawal-rows"></tbody></table></div><p class="admin-message" id="withdrawal-admin-message" role="status"></p></div></section>
   </main>
+  <div class="modal-backdrop" data-modal="wallet" hidden>
+    <div class="modal">
+      <button class="modal-close" type="button" aria-label="Close">&times;</button>
+      <p class="eyebrow">Wallet update</p>
+      <h2 id="wallet-client-name">Client</h2>
+      <p class="modal-copy" id="wallet-client-meta">Current balance: Rs 0</p>
+      <form id="wallet-form">
+        <label>Amount (Rs)<input name="amount" type="number" min="1" step="1" placeholder="e.g. 50" required></label>
+        <div class="wallet-form-actions">
+          <button class="button button-primary" type="submit" name="action" value="add">Add money</button>
+          <button class="button button-outline" type="submit" name="action" value="subtract">Subtract money</button>
+        </div>
+        <p class="form-message" id="wallet-message" role="status"></p>
+      </form>
+    </div>
+  </div>
   <script src="/static/admin.js"></script>
 </body>
 </html>

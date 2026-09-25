@@ -3,6 +3,10 @@ const rows = document.querySelector('#client-rows');
 const message = document.querySelector('#admin-message');
 const withdrawalRows = document.querySelector('#withdrawal-rows');
 const withdrawalMessage = document.querySelector('#withdrawal-admin-message');
+const walletBackdrop = document.querySelector('[data-modal="wallet"]');
+const walletForm = document.querySelector('#wallet-form');
+const walletMessage = document.querySelector('#wallet-message');
+let clientsById = {};
 
 function formatDate(value) {
   return new Date(value).toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' });
@@ -21,7 +25,9 @@ async function loadClients() {
     return;
   }
   const result = await response.json();
-  rows.innerHTML = result.clients.map((client) => `<tr><td><strong>${client.name}</strong><small>HS-${String(client.id).padStart(4, '0')}</small></td><td>${client.mobile}</td><td><span class="status status-${client.status.toLowerCase()}">${client.status}</span></td><td>Rs ${client.balance}</td><td>${client.tasks_completed}</td><td>${formatDate(client.joined_at)}</td></tr>`).join('');
+  clientsById = Object.fromEntries(result.clients.map((client) => [String(client.id), client]));
+  rows.innerHTML = result.clients.map((client) => `<tr><td><strong>${client.name}</strong><small>HS-${String(client.id).padStart(4, '0')}</small></td><td>${client.mobile}</td><td><span class="status status-${client.status.toLowerCase()}">${client.status}</span></td><td>Rs ${client.balance}</td><td><button class="table-action wallet-action" data-wallet-id="${client.id}">Update wallet</button></td><td>${client.tasks_completed}</td><td>${formatDate(client.joined_at)}</td></tr>`).join('');
+  document.querySelectorAll('[data-wallet-id]').forEach((button) => button.addEventListener('click', () => openWalletModal(button.dataset.walletId)));
   document.querySelector('#total-clients').textContent = result.clients.length;
   document.querySelector('#active-clients').textContent = result.clients.filter((client) => client.status === 'Active').length;
   document.querySelector('#pending-clients').textContent = result.clients.filter((client) => client.status === 'Pending').length;
@@ -29,6 +35,50 @@ async function loadClients() {
   message.textContent = result.clients.length ? '' : 'No client registrations yet.';
   await loadWithdrawals();
 }
+
+function openWalletModal(clientId) {
+  const client = clientsById[clientId];
+  if (!client) return;
+  walletForm.dataset.clientId = client.id;
+  walletForm.reset();
+  walletMessage.classList.remove('error');
+  walletMessage.textContent = '';
+  document.querySelector('#wallet-client-name').textContent = client.name;
+  document.querySelector('#wallet-client-meta').textContent = `${client.mobile} | Current balance: Rs ${client.balance}`;
+  walletBackdrop.hidden = false;
+  walletForm.querySelector('input[name="amount"]').focus();
+}
+
+function closeWalletModal() {
+  walletBackdrop.hidden = true;
+}
+
+walletBackdrop.querySelector('.modal-close').addEventListener('click', closeWalletModal);
+walletBackdrop.addEventListener('click', (event) => {
+  if (event.target === walletBackdrop) closeWalletModal();
+});
+
+walletForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const action = event.submitter ? event.submitter.value : 'add';
+  const formData = new FormData(walletForm);
+  formData.set('action', action);
+  const response = await fetch(`/api/admin/clients/${walletForm.dataset.clientId}/wallet`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  });
+  const result = await response.json();
+  walletMessage.classList.toggle('error', !response.ok);
+  walletMessage.textContent = response.ok ? result.message : result.detail;
+  if (response.ok) {
+    walletForm.reset();
+    await loadClients();
+    const updated = clientsById[walletForm.dataset.clientId];
+    if (updated) document.querySelector('#wallet-client-meta').textContent = `${updated.mobile} | Current balance: Rs ${updated.balance}`;
+  }
+});
+
 
 async function loadWithdrawals() {
   const response = await fetch('/api/admin/withdrawals', { headers: { Authorization: `Bearer ${token}` } });

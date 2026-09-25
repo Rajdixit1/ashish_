@@ -319,6 +319,31 @@ async def admin_clients(authorization: str | None = Header(default=None)) -> dic
     return {"clients": [dict(client) for client in clients]}
 
 
+@app.post("/api/admin/clients/{client_id}/wallet")
+async def update_client_wallet(
+    client_id: int,
+    action: str = Form(...),
+    amount: int = Form(...),
+    authorization: str | None = Header(default=None),
+) -> dict[str, str | int]:
+    require_admin(authorization)
+    if action not in ("add", "subtract"):
+        raise HTTPException(status_code=400, detail="Action must be 'add' or 'subtract'.")
+    if amount <= 0:
+        raise HTTPException(status_code=400, detail="Amount must be greater than zero.")
+    delta = amount if action == "add" else -amount
+    with connect_db() as connection:
+        client = connection.execute("SELECT id, name, balance FROM clients WHERE id = ? AND role = 'client'", (client_id,)).fetchone()
+        if not client:
+            raise HTTPException(status_code=404, detail="Client not found.")
+        if delta < 0 and client["balance"] < amount:
+            raise HTTPException(status_code=400, detail="Cannot subtract more than the current wallet balance.")
+        connection.execute("UPDATE clients SET balance = balance + ? WHERE id = ?", (delta, client_id))
+        updated = connection.execute("SELECT balance FROM clients WHERE id = ?", (client_id,)).fetchone()
+    verb = "Added" if action == "add" else "Subtracted"
+    return {"message": f"{verb} Rs {amount}. New wallet balance is Rs {updated['balance']}.", "balance": updated["balance"]}
+
+
 @app.post("/api/admin/tasks")
 async def create_task(
     title: str = Form(...),
